@@ -10,7 +10,7 @@ import Link from "next/link";
 import { FormEvent, useRef, useState } from "react";
 
 import { Input } from "@/components/ui/input";
-//import { Description } from "@/components/description";
+import { Description } from "@/components/description";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
 //import { Images } from "@/components/images";
@@ -171,6 +171,12 @@ const Edit = ({ params }: EditdPageProps) => {
                 <h2 className="font-semibold">About this gig</h2>
             </div>
 
+            <Description
+                initialContent={gig.description}
+                editable={true}
+                className="pb-40 mt-12 2xl:px-[200px] xl:px-[90px] xs:px-[17px]"
+                gigId={gig._id}
+            />
         </>
     )
 }

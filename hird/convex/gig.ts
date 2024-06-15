@@ -202,3 +202,27 @@ export const remove = mutation({
     }
 });
 
+export const updateDescription = mutation({
+    args: {
+        id: v.id("gigs"),
+        description: v.string(),
+    },
+    handler: async (ctx, args) => {
+        const identity = await ctx.auth.getUserIdentity();
+
+        if (!identity){
+            throw new Error("User not authorized");
+        }
+
+        const description = args.description.trim();
+
+        if (description.length > 20000){
+            throw new Error("Description is too long");
+        }
+
+        const gig = await ctx.db.patch(args.id, { description: args.description });
+
+        return gig;
+    },
+});
+

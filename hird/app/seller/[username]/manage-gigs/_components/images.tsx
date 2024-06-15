@@ -30,24 +30,30 @@ export const Images = ({
 }: ImagesProps) => {
     const [isHovered, setIsHovered] = useState(false);
     return (
+
+        
         <Carousel className="select-none" onMouseEnter={() => setIsHovered(true)}
+        
             onMouseLeave={() => setIsHovered(false)}>
             <CarouselContent className={className || ""}>
+                
                 {images.map((image) => {
+                    
                     return (
                         <CarouselItem
                             key={image._id}
                         >
+                         { allowDelete && (
+                            <Actions
+                                side="bottom"
+                                sideOffset={10}
+                                storageId={image.storageId}
+                            >
+                            <Trash2 />
+                            </Actions>
+                        )}
                             <AspectRatio ratio={16 / 9}>
-                                { allowDelete && (
-                                    <Actions
-                                        side="bottom"
-                                        sideOffset={10}
-                                        storageId={image.storageId}
-                                    >
-                                        <Trash2 />
-                                    </Actions>
-                                )}
+
                                 <Image
                                     src={image.url || 'https://upload.wikimedia.org/wikipedia/commons/thumb/3/3f/Placeholder_view_vector.svg/2560px-Placeholder_view_vector.svg.png'}
                                     alt={title}
